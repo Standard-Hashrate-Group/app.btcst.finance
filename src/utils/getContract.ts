@@ -16,11 +16,12 @@ import LPTokenScanner from "../constants/abi/LPTokenScanner.json";
 import IBEP20 from "../core/build/contracts/IBEP20.json";
 import IMiningFarm from "../core/build/contracts/IMiningFarm.json";
 import ISTokenERC20 from "../core/build/contracts/ISTokenERC20.json";
-
+import V2FarmWithApiWithUpgrade from "../core/build/contracts/V2FarmWithApiWithUpgrade.json";
 const CONTRACTS = {
     IBEP20,
     IMiningFarm,
     ISTokenERC20,
+    V2FarmWithApiWithUpgrade,
     ERC20,
     IUniswapV2Factory,
     IUniswapV2Pair,

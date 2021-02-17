@@ -9,14 +9,14 @@ import LPTokenWithValue from "../types/LPTokenWithValue";
 import { isWETH } from "../utils";
 import { fetchLPTokenWithValue, fetchMyLPTokens, fetchMyPools } from "../utils/fetch-utils";
 import useSDK from "./useSDK";
-import { getBTCSTPrice, viewFarmBasicInfo,viewRoundSlot,fetchBtcMiningStat,getTotalRemainingSupplyLocked,viewUserInfo,totalSupplyOfSToken,fetchTotalMinedRTokenInpool, fetchCurrentTotalStakedSTokenInpool,viewTotalRewardInPoolFrom} from "../utils/api-utils";
+import { _roundSlotsReward,getBTCSTPrice, viewFarmBasicInfo,viewRoundSlot,fetchBtcMiningStat,getTotalRemainingSupplyLocked,viewUserInfo,totalSupplyOfSToken,fetchTotalMinedRTokenInpool, fetchCurrentTotalStakedSTokenInpool,viewTotalRewardInPoolFrom} from "../utils/api-utils";
 import { getContract, parseBalance } from "../utils";
 import { BTCST,BTCSTFarm,BBTC } from "../constants/contracts";
 import MiningUserInfo from "../types/MiningUserInfo";
 import MiningStakeRecord from "../types/MiningStakeRecord";
 import Token from "../types/Token";
 export const BATCH_LOAD_RECORD_LIMIT = 5;
-
+const RAMOUNT_DIVIDER = BigNumber.from(1e8).pow(BigNumber.from(4));
 export interface MiningStat{
     time:number,
     price:FixedNumber,
@@ -201,10 +201,20 @@ const useHistoryState = () => {
                 );
                 for (let index = 0; index < arr.length; index++) {
                     data[index] = Object.assign({},data[index],{timeKey:arr[index]});
+                    let rewardInfo = await _roundSlotsReward(arr[index],BBTC,provider);
+                    
+                    let rAmount = rewardInfo.rAmount;
+                    let rAccum = rewardInfo.rAccumulateAmount;
+                    if (rewardInfo.rAmount){
+                        rAmount = rewardInfo.rAmount.div(RAMOUNT_DIVIDER);
+                    }
+                    if (rewardInfo.rAccumulateAmount){
+                        rAccum = rewardInfo.rAccumulateAmount.div(RAMOUNT_DIVIDER);
+                    }
                     data[index] = {
                         rewardLastSubmiter:data[index]['rewardLastSubmiter'],
-                        rewardAmount:data[index]['rewardAmount'],
-                        rewardAccumulateAmount:data[index]['rewardAccumulateAmount'],
+                        rewardAmount:rAmount,
+                        rewardAccumulateAmount:rAccum,
                         totalStaked:data[index]['totalStaked'],
                         stakedLowestWaterMark:data[index]['stakedLowestWaterMark'],
                         totalStakedInSlot:data[index]['totalStakedInSlot'],

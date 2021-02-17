@@ -90,6 +90,9 @@ export const formatDate = (date: Date) => {
 };
 
 export const formatTimeKey = (value:ethers.BigNumber)=>{
+    if (BigNumber.from(0).eq(value)){
+        value = BigNumber.from('1613390400');
+    }
     const date = new Date(value.toNumber() * 1000);
     return date.toLocaleDateString("zh-cn");
 };

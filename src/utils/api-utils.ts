@@ -24,7 +24,7 @@ import {
     pow10
 } from "./index";
 export const fetchTotalMinedRTokenInpool = async (provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewAllTimeTotalMined();
     return value;
 };
@@ -36,7 +36,7 @@ export const fetchCurrentTotalStakedSTokenInpool = async (provider: ethers.provi
 };
 
 export const viewTotalRewardInPoolFrom = async(account: string,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewTotalRewardInPoolFrom(account);
     return value;
     
@@ -53,7 +53,7 @@ export const getTotalRemainingSupplyLocked = async(provider: ethers.providers.Js
 };
 
 export const viewTotalRewardInPool = async(provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewTotalRewardInPool();
     return value;
 };
@@ -65,14 +65,14 @@ export const getFreeToTransferAmount = async(account: string,provider: ethers.pr
 };
 
 export const viewUserInfo = async(account: string,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewUserInfo(account);
     return value;
 };
 
 export const stakeActions = ()=>{
     const enter = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
-        const farm = getContract("IMiningFarm", BTCSTFarm, signer);
+        const farm = getContract("V2FarmWithApiWithUpgrade", BTCSTFarm, signer);
         console.log("before gas limit:"+amount);
         const gasLimit = await farm.estimateGas.apiDepositToMining(amount);
         console.log(await gasLimit.toString()+" gas limit");
@@ -83,7 +83,7 @@ export const stakeActions = ()=>{
     }, []);
 
     const leave = useCallback(async (amount: ethers.BigNumber, signer: ethers.Signer) => {
-        const farm = getContract("IMiningFarm", BTCSTFarm, signer);
+        const farm = getContract("V2FarmWithApiWithUpgrade", BTCSTFarm, signer);
         console.log("before gas limit:"+amount);
         const gasLimit = await farm.estimateGas.apiWithdrawLatestSToken(amount);
         console.log(await gasLimit.toString()+" gas limit");
@@ -100,23 +100,23 @@ export const stakeActions = ()=>{
 };
 
 export const viewTotalMinedRewardFrom = async(account: string,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewTotalMinedRewardFrom(account);
     return value;
 };
 export const viewTotalClaimedRewardFrom = async(account: string,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewTotalClaimedRewardFrom(account);
     return value;
 };
 export const viewGetTotalRewardBalanceInPool = async(account: string,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewGetTotalRewardBalanceInPool(account);
     return value;
 };
 
 export const apiClaimAmountOfReward = async(account: string,amount: ethers.BigNumber,reCalculate :boolean ,signer: ethers.Signer)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,signer);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,signer);
     const gasLimit = await contract.estimateGas.apiClaimAmountOfReward(account,amount,reCalculate);
     const tx = await contract.apiClaimAmountOfReward(account,amount,reCalculate, {
         gasLimit: gasLimit.mul(120).div(100)
@@ -151,13 +151,19 @@ export async function getBTCSTPrice() {
 }
 
 export const viewRoundSlot = async(timeKey: number,provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     const value = await contract.viewRoundSlot(timeKey);
     return value;
 };
 
+export const _roundSlotsReward = async(timeKey: number,token: string,provider: ethers.providers.JsonRpcProvider)=>{
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
+    const value = await contract._roundSlotsReward(timeKey,token);
+    return value;
+};
+
 export const viewFarmBasicInfo = async(provider: ethers.providers.JsonRpcProvider)=>{
-    const contract = getContract("IMiningFarm",BTCSTFarm,provider);
+    const contract = getContract("V2FarmWithApiWithUpgrade",BTCSTFarm,provider);
     console.log(contract);
     const data = await Promise.all(
         ["_farmStartedTime", "_miniStakePeriodInSeconds", "_farmDescription"].map(field => {

@@ -2,12 +2,12 @@
   "files": {
     "static/js/0.fbc03bde.chunk.js": "./static/js/0.fbc03bde.chunk.js",
     "static/js/0.fbc03bde.chunk.js.map": "./static/js/0.fbc03bde.chunk.js.map",
-    "app.js": "./static/js/app.bee54b7b.chunk.js",
-    "app.js.map": "./static/js/app.bee54b7b.chunk.js.map",
+    "app.js": "./static/js/app.bd1dee5d.chunk.js",
+    "app.js.map": "./static/js/app.bd1dee5d.chunk.js.map",
     "runtime~app.js": "./static/js/runtime~app.14c85192.js",
     "runtime~app.js.map": "./static/js/runtime~app.14c85192.js.map",
-    "static/js/3.62395ba5.chunk.js": "./static/js/3.62395ba5.chunk.js",
-    "static/js/3.62395ba5.chunk.js.map": "./static/js/3.62395ba5.chunk.js.map",
+    "static/js/3.ccb3f0f1.chunk.js": "./static/js/3.ccb3f0f1.chunk.js",
+    "static/js/3.ccb3f0f1.chunk.js.map": "./static/js/3.ccb3f0f1.chunk.js.map",
     "static/js/4.423a59cf.chunk.js": "./static/js/4.423a59cf.chunk.js",
     "static/js/4.423a59cf.chunk.js.map": "./static/js/4.423a59cf.chunk.js.map",
     "static/js/5.5c356f34.chunk.js": "./static/js/5.5c356f34.chunk.js",
@@ -78,7 +78,7 @@
     "manifest.json": "./manifest.json",
     "pools.json": "./pools.json",
     "serve.json": "./serve.json",
-    "static/js/3.62395ba5.chunk.js.LICENSE.txt": "./static/js/3.62395ba5.chunk.js.LICENSE.txt",
+    "static/js/3.ccb3f0f1.chunk.js.LICENSE.txt": "./static/js/3.ccb3f0f1.chunk.js.LICENSE.txt",
     "static/media/ETH.png": "./static/media/ETH.ab794f02.png",
     "static/media/bell.png": "./static/media/bell.cf04af27.png",
     "static/media/binance-wallet.svg": "./static/media/binance-wallet.f7d6abc2.svg",
@@ -107,7 +107,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.14c85192.js",
-    "static/js/3.62395ba5.chunk.js",
-    "static/js/app.bee54b7b.chunk.js"
+    "static/js/3.ccb3f0f1.chunk.js",
+    "static/js/app.bd1dee5d.chunk.js"
   ]
 }
